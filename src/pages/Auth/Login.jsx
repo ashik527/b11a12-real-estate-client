@@ -2,7 +2,6 @@ import { useForm } from 'react-hook-form';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from '../../firebase/firebase.init';
-import axios from 'axios';
 import Swal from 'sweetalert2';
 
 const Login = () => {
@@ -20,11 +19,6 @@ const Login = () => {
 
       await signInWithEmailAndPassword(auth, email, password);
 
-      const tokenRes = await axios.post(
-        `${import.meta.env.VITE_API_URL}/users/jwt`,
-        { email }
-      );
-      localStorage.setItem('access-token', tokenRes.data.token);
 
       Swal.fire({
         title: 'Welcome!',
